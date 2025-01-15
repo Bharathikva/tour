@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Joyride from 'react-joyride';
 
 const DashboardTour = () => {
-  const [run, setRun] = useState(true);
+  const [run, setRun] = useState(false); // Set to false initially
 
+  // Define the steps
   const steps = [
     {
       target: '.notification-icon',
@@ -22,6 +23,17 @@ const DashboardTour = () => {
       content: 'Tap this button to proceed further.',
     },
   ];
+
+  // Effect to trigger the tour after a small delay when the component is mounted
+  useEffect(() => {
+    // Delay to ensure all elements are rendered
+    const timeout = setTimeout(() => {
+      setRun(true);
+    }, 200); // A slight delay (200ms) to ensure elements are in the DOM
+
+    // Cleanup timeout when component unmounts
+    return () => clearTimeout(timeout);
+  }, []);
 
   const handleTourCallback = (data) => {
     const { status } = data;
@@ -87,7 +99,7 @@ const DashboardTour = () => {
         continuous
         showProgress
         showSkipButton
-        run={run}
+        run={run} // Only run the tour once `run` is set to true
         callback={handleTourCallback}
         styles={{
           options: {
