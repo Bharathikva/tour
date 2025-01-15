@@ -45,7 +45,7 @@ const DashboardTour = () => {
   return (
     <div style={{ position: 'relative' }}>
       <img
-        src="/W.jpeg"
+        src="/ww.jpeg"
         alt="Dashboard Screenshot"
         style={{ width: '100%', height: 'auto' }}
       />
